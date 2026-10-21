@@ -1,48 +1,27 @@
-name: 🐞 Bug report
-description: Report a bug or an issue.
+name: Login or patching problem
+description: Report a problem with the Moodle Browser Login patch.
 title: "bug: "
-labels: ["Bug report"]
 body:
   - type: markdown
     attributes:
       value: |
-        # Patches template bug report
-
-        Before creating a new bug report, please keep the following in mind:
-
-        - **Do not submit a duplicate bug report**: Search for existing bug reports [here](https://github.com/TEMPLATE/template-patches-template/issues?q=label%3A%22Bug+report%22).
-        - **Review the contribution guidelines**: Make sure your bug report adheres to it. You can find the guidelines [here](https://github.com/TEMPLATE/template-patches-template/blob/main/CONTRIBUTING.md).
-  - type: textarea
+        Read the known issues and verification limits in the README first. Never include passwords, access tokens, passport values, or complete callback URLs. Crop private account and course details from screenshots.
+  - type: input
+    id: versions
     attributes:
-      label: Bug description
-      description: |
-        - Describe your bug in detail
-        - Add steps to reproduce the bug if possible (Step 1. ... Step 2. ...)
-        - Add images and videos if possible
+      label: App and patch versions
+      description: Include Moodle, Morphe, Android, and patch bundle versions.
     validations:
       required: true
   - type: textarea
+    id: behavior
     attributes:
-      label: Error logs
-      description: Exceptions can be captured by running `logcat | grep AndroidRuntime` in a shell.
-      render: shell
-  - type: textarea
+      label: Steps and result
+      description: Was this first login or reconnect? Did login finish in the browser, return to the app, or both? Include the exact error text without private URL parameters.
+    validations:
+      required: true
+  - type: input
+    id: site
     attributes:
-      label: Solution
-      description: If applicable, add a possible solution to the bug.
-  - type: textarea
-    attributes:
-      label: Additional context
-      description: Add additional context here.
-  - type: checkboxes
-    id: acknowledgements
-    attributes:
-      label: Acknowledgements
-      description: Your bug report will be closed if you don't follow the checklist below.
-      options:
-        - label: I have checked all open and closed bug reports and this is not a duplicate.
-          required: true
-        - label: I have chosen an appropriate title.
-          required: true
-        - label: All requested information has been provided properly.
-          required: true
+      label: Moodle site (optional)
+      description: A public site hostname or authentication-provider name, if you are comfortable sharing it.

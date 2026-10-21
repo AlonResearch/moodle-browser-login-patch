@@ -24,8 +24,8 @@ As a last resort, remove the saved account using the pencil/edit control on Mood
 
 ## Install in Morphe
 
-1. Add [this GitHub source](https://github.com/AlonResearch/moodle-browser-login-patch) under **Sources > + > Remote**, or open the [add-source link](https://morphe.software/add-source?github=AlonResearch/moodle-browser-login-patch).
-2. Enable **Pre-release patches** for this source during the experimental release. Alternatively download the `.mpp` from [Releases](https://github.com/AlonResearch/moodle-browser-login-patch/releases) and use **Sources > + > Local**. **Patch selections > Import** accepts selection JSON, not bundles.
+1. Download the `.mpp` bundle from the newest experimental entry on [Releases](https://github.com/AlonResearch/moodle-browser-login-patch/releases) to your phone.
+2. In Morphe, use **Sources > + > Local** and choose that `.mpp`. **Patch selections > Import** accepts selection JSON, not bundles. Replace the local source with a newer bundle when updating; automatic repository-source setup will follow a stable release.
 3. Select the original official Moodle **5.2.1** APK from storage, enable **Add browser login option**, patch it, and install the result. Installing the original first is unnecessary.
 4. Enter your Moodle site and use **Log in through browser** if the usual login fails. Choose your institution's login provider on its real website.
 
