@@ -2,6 +2,10 @@
 
 This is an experimental release. The patch is scoped to the official Moodle Android 5.2.1 APK identified in the README.
 
+Published preview: [v1.0.0-dev.1](https://github.com/AlonResearch/moodle-browser-login-patch/releases/tag/v1.0.0-dev.1). The GitHub Actions release succeeded. The downloaded release bundle was applied again to the original APK and passed the same resource/syntax checks; its resulting login resources were byte-for-byte identical to the final local build's output. GitHub artifact provenance verification returned one successful result.
+
+Published bundle SHA-256: `d963e3fbc54a89fd03246b769b90690bbbf131476d998d23ae4162f3a657d6c8`.
+
 ## Completed
 
 - Built the Android `.mpp` with Java 21 and the pinned public Morphe plugin/patcher sources; both dependency checkouts were clean at their recorded commits.
