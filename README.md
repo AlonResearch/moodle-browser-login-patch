@@ -8,6 +8,8 @@ An experimental patch for use with Morphe. It adds **Log in through browser** to
 
 **Website login and app login are different.** Browser cookies stay in the browser. The server must issue an app token and redirect back to Moodle. Merely reaching your courses in the browser does not prove the app has logged in.
 
+**Experimental status:** full browser-to-app login and logout/reconnect completion are still awaiting independent confirmation. See the exact checks and gaps in [VERIFICATION.md](VERIFICATION.md). Keep the remove-account workaround below available.
+
 ### "Plugin not enabled or configured"
 
 Moodle can show this error when its mobile authentication mode is not set to browser SSO. In Moodle's launch script, the handoff cookie is set before that configuration check. On JYU, the user reported that **Continue -> website login** then worked. That sequence depends on the server and browser session and is not guaranteed elsewhere. It does not necessarily mean the mobile web service itself is disabled.

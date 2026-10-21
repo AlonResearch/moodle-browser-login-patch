@@ -1,0 +1,29 @@
+# Verification record
+
+This is an experimental release. The patch is scoped to the official Moodle Android 5.2.1 APK identified in the README.
+
+## Completed
+
+- Built the Android `.mpp` with Java 21 and the pinned public Morphe plugin/patcher sources; both dependency checkouts were clean at their recorded commits.
+- Loaded and applied the bundle with Morphe Desktop. The bundle contains Android DEX for Morphe Manager.
+- Compared the original and resulting APK entry by entry: only the credentials and reconnect JavaScript resources changed. Existing DEX, native libraries, and all other existing file contents were unchanged.
+- Parsed both resulting JavaScript resources independently with Node.js. Confirmed the original site login-mode decisions, password-form conditions, native SSO service/launch URL parameters, and reconnect redirect data are retained.
+- Verified the emulator APK's Android v2 signature with the Android SDK. This test signing key is not distributed.
+- Tried applying the patch to the previous JYU-patched APK and an already patched development APK: both failed on resource checks instead of creating an output APK.
+- On Android 16, a development build showed the ordinary form plus the optional browser button for JYU and Moodle's official public demo site. The JYU button opened the external browser at Moodle's native mobile launch endpoint. No JYU account authentication or course action was performed during this audit.
+- The public demo account's normal password login reached the Moodle app dashboard. No course data was edited.
+
+## Limits
+
+- The user reported successful JYU login with the earlier JYU-only bundle. That report is not independent verification of every part of the revised generic flow.
+- Full browser-to-app authentication and logout/reconnect completion have not yet been independently verified for this release. The Windows host was low on available RAM; the Android 16 emulator stopped twice, and a smaller Android 14 emulator encountered app-not-responding dialogs. The README retains the remove-saved-account workaround.
+- The final compiled credentials view separates the form and browser button into independent Angular conditionals with an additional binding slot. Static verification covers that allocation. Further physical-device confirmation is welcome.
+- Different Moodle sites, authentication providers, server versions, disabled mobile services, and site token policies can produce different outcomes. No claim of universal authentication success is made.
+
+To repeat the APK content and syntax checks:
+
+```sh
+python tools/verify_apk.py original-moodle-5.2.1.apk patched-moodle.apk
+```
+
+This command requires Python and Node.js. Keep authentication tokens, browser callback URLs, and private user details out of issue reports.
