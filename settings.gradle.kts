@@ -1,6 +1,7 @@
 rootProject.name = "moodle-browser-login-patch"
 
 pluginManagement {
+    providers.gradleProperty("morphePluginSource").orNull?.let { includeBuild(it) }
     repositories {
         gradlePluginPortal()
         google()
@@ -18,4 +19,12 @@ pluginManagement {
 
 plugins {
     id("app.morphe.patches") version "1.3.4"
+}
+
+providers.gradleProperty("morphePatcherSource").orNull?.let { sourcePath ->
+    includeBuild(sourcePath) {
+        dependencySubstitution {
+            substitute(module("app.morphe:morphe-patcher")).using(project(":"))
+        }
+    }
 }
