@@ -44,6 +44,22 @@ It does not read passwords, copy cookies, install a proxy, collect analytics, or
 See Moodle's [launch implementation](https://github.com/moodle/moodle/blob/MOODLE_500_STABLE/admin/tool/mobile/launch.php) and [SSO troubleshooting guide](https://docs.moodle.org/502/en/Moodle_app_FAQ#SSO_is_not_working_with_my_custom_auth_plugin). This project is independent of Moodle, Morphe, and JYU.
 
 <!-- PATCHES_START EXPANDED -->
+> **[v1.0.0-dev.1](https://github.com/AlonResearch/moodle-browser-login-patch/releases/tag/v1.0.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+<details open>
+<summary>📦 Moodle&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5.2.1 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Add browser login option](#add-browser-login-option) | Add a system-browser login button to first login and reconnect while preserving the site's normal login options. |  |
+
+</details>
+
 <!-- PATCHES_END -->
 
 ## Build
