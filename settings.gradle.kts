@@ -1,4 +1,4 @@
-rootProject.name = "morphe-patches-template"
+rootProject.name = "moodle-browser-login-patch"
 
 pluginManagement {
     repositories {
