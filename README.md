@@ -1,70 +1,67 @@
-# Moodle Browser Login patch
+<h1 align="center">Moodle Browser Login</h1>
 
-An experimental patch for use with [Morphe Manager](https://github.com/MorpheApp/morphe-manager), a general-purpose Android app patcher that can apply compatible patches to different apps. This bundle adds **Log in through browser** to the official Moodle Android app's first-login and reconnect screens. The site's normal password form and identity-provider choices remain available. It works across Moodle site hostnames when the official Android app version and each site's authentication setup are compatible.
+<p align="center">Use your Moodle site's browser sign-in from the official Moodle Android app.</p>
 
-## Read before using
+<p align="center">
+  <a href="https://github.com/AlonResearch/moodle-browser-login-patch/releases/tag/v1.0.0-dev.1">Download the preview</a>
+  ·
+  <a href="https://github.com/MorpheApp/morphe-manager">Morphe Manager</a>
+</p>
 
-**This is a login-routing workaround, not a guarantee that every Moodle server can authenticate the app.** Only Moodle Android **5.2.1** (`com.moodle.moodlemobile`) is supported. Other app versions require a new patch target.
+> **Experimental preview · Android app version 5.2.1 only**
 
-**Website login and app login are different.** Browser cookies stay in the browser. The server must issue an app token and redirect back to Moodle. Merely reaching your courses in the browser does not prove the app has logged in.
+## What this patch does
 
-**Experimental status:** full browser-to-app login and logout/reconnect completion are still awaiting independent confirmation. See the exact checks and gaps in [VERIFICATION.md](VERIFICATION.md). Keep the remove-account workaround below available.
+Adds a **Log in through browser** option to the Moodle app's first sign-in and reconnect screens. It opens your Moodle site's browser login so you can choose your institution's sign-in method, such as JYU credentials. The normal Moodle login choices remain available.
 
-### "Plugin not enabled or configured"
+The patch works across Moodle site addresses. The Moodle server still needs to support browser sign-in and return an app login token. A browser session is not copied into the app, and a successful website login by itself does not mean the app has signed in.
 
-If the browser shows this error, tap **Continue**, then choose **Login with JYU credentials** (or your institution's SSO option) on Moodle's login page and finish the sign-in. The browser may reuse an existing university SSO session, so you usually do not need to log out first. Wait for the browser to return to the Moodle app, then check that the app itself is signed in; seeing Moodle in the browser alone is not enough. This Continue → institution login sequence is what the JYU user reported working.
+## Install
 
-Moodle's launch script sets a short-lived app-handoff cookie before checking whether browser login is enabled for the site. That can explain why the error appears while a later institution login still completes the handoff. It is an app-launch marker, not your browser's Moodle session cookie being copied into the app. The error does not necessarily mean mobile web services are disabled. This server-dependent workaround is not guaranteed on every Moodle site. If the app does not open or reconnect, use the website or ask the site administrator to check mobile authentication mode, mobile web services, token permissions, and the SSO return redirect. The patch cannot change those server settings.
+Choose one of these options from the [preview release](https://github.com/AlonResearch/moodle-browser-login-patch/releases/tag/v1.0.0-dev.1).
 
-### Reconnecting after logout
+### Install the ready-to-use APK
 
-The earlier JYU-only patch changed first login but missed **Reconnect**. This version adds the browser button to both screens. If an older installation still shows only a password field, patch the original APK again with this bundle and install the update using the same Morphe signing key.
+Download the [ready-to-install APK](https://github.com/AlonResearch/moodle-browser-login-patch/releases/download/v1.0.0-dev.1/Moodle-5.2.1-Browser-Login-v1.0.0-dev.1.apk) and install it on Android. This is the quickest option for a new install.
 
-As a last resort, remove the saved account using the pencil/edit control on Moodle's **Accounts** screen, then add the site again. This removes local app account data, not your university account. **Sync any offline work first:** removing the saved account can discard cached data or unsynced work. Entering an SSO password in Moodle's native password field will not fix a login-method mismatch.
+The APK has this project's signing key. Android may not install it over a Moodle app from Google Play or one patched by Morphe because those use a different signing key. If Android reports a signature conflict, sync offline work before uninstalling the existing Moodle app. Uninstalling clears its local data. Future updates to this APK must use this project's signature.
 
-## Install in Morphe
+### Patch with Morphe
 
-1. Download the `.mpp` bundle from the newest experimental entry on [Releases](https://github.com/AlonResearch/moodle-browser-login-patch/releases) to your phone.
-2. In [Morphe Manager](https://github.com/MorpheApp/morphe-manager), use **Sources > + > Local** and choose that `.mpp`. **Patch selections > Import** accepts selection JSON, not bundles. Replace the local source with a newer bundle when updating; automatic repository-source setup will follow a stable release.
-3. Select the original official Moodle **5.2.1** APK from storage, enable **Add browser login option**, patch it, and install the result. Installing the original first is unnecessary.
-4. Enter your Moodle site and use **Log in through browser** if the usual login fails. Choose your institution's login provider on its real website.
+Use this option if you already use Morphe or want Morphe to sign the patched app with your own key.
 
-Android cannot update an app signed by a different key. Replacing a Play Store installation may require removing it, which clears its local data. Retain Morphe's signing key for subsequent patched updates.
+1. Download the [Morphe patch bundle](https://github.com/AlonResearch/moodle-browser-login-patch/releases/download/v1.0.0-dev.1/patches-1.0.0-dev.1.mpp).
+2. In [Morphe Manager](https://github.com/MorpheApp/morphe-manager), choose **Sources → + → Local** and select the downloaded `.mpp` file. **Patch selections → Import** is for JSON selection files.
+3. Select an unmodified official Moodle Android **5.2.1** APK and apply **Add browser login option**.
+4. Install the result. Keep the same Morphe signing key when updating this installation.
 
-Disable or remove the earlier JYU-only patch source before patching Moodle with this source. Use the original APK, not an already patched APK.
+Morphe is a general-purpose Android app patcher. This patch bundle is specific to Moodle Android 5.2.1; it does not make other app versions compatible.
 
-## Direct install APK
+## Sign in
 
-The experimental release also includes a pre-patched APK for Moodle Android **5.2.1**. It is signed with this project's release key so Android can install it directly. Android treats it as a different signer from the Play Store APK and from APKs signed by your Morphe installation. If Android refuses the install because of a signature conflict, sync offline work, uninstall the existing Moodle app, then install the release APK. Uninstalling clears local app data. This release key is used for future direct-install APK updates; do not expect an APK signed by another key to update this copy.
+1. Add your Moodle site in the app and tap **Log in through browser**.
+2. On the university login page, choose your institution's sign-in option and finish signing in.
+3. If Moodle shows **“Plugin not enabled or configured”**, tap **Continue**, then choose the institution's sign-in option on the Moodle page. For JYU, choose **Login with JYU credentials**.
+4. Wait for the browser to return to the Moodle app, then check that the app itself is signed in.
 
-The release APK and `.mpp` apply the same patch. The `.mpp` route lets [Morphe Manager](https://github.com/MorpheApp/morphe-manager) sign the result with your own Morphe key; the direct APK route is simpler to install but requires the project release signature. Neither option guarantees that every Moodle server can complete its browser-to-app token handoff.
+You usually do not need to log out first. If your university sign-in session is already active, the browser may reuse it. On JYU, a user reported that **Continue → Login with JYU credentials** completed the app sign-in after the error page appeared.
 
-Official downloads: [Moodle](https://download.moodle.org/mobile/). This patch requires 5.2.1 even if that page later offers a newer version. Original development APK SHA-256: `96fdab4bc72376f4a766a1fe47f70e2306391ce5246cda7eff5486f697f8e61d`. The release contains a patched APK and a patch bundle, but not the private signing key or credentials.
+Moodle sets a short-lived app handoff marker before checking its mobile login configuration. That marker is not your browser session cookie being transferred to the app. Other Moodle sites may behave differently depending on their server and sign-in setup.
 
-## How it works
+## If reconnect still fails
 
-The patch exposes Moodle's existing Angular browser button independently of the password form in two compiled JavaScript resources. It calls the existing SSO handler with system-browser mode (`2`), keeping Moodle's service, launch URL, reconnect data, and passport callback handling. Every resource anchor is validated before either resource is written; unsupported or already-patched APKs fail rather than receiving a partial patch.
+Sync offline work first. In the app's **Accounts** screen, use the pencil/edit control to remove the saved Moodle account, then add the site again. Removing the account can clear local app data or unsynced work; it does not delete your university account.
 
-It does not read passwords, copy cookies, install a proxy, collect analytics, or modify course modules. The browser button is for authentication and cannot add unsupported course features. Tokens remain subject to Moodle's existing server and app security checks. Avoid publishing complete login/callback URLs containing passport or token values.
+## Compatibility and status
 
-See Moodle's [launch implementation](https://github.com/moodle/moodle/blob/MOODLE_500_STABLE/admin/tool/mobile/launch.php) and [SSO troubleshooting guide](https://docs.moodle.org/502/en/Moodle_app_FAQ#SSO_is_not_working_with_my_custom_auth_plugin). This project is independent of Moodle, Morphe, and JYU.
+- Android, official Moodle app **5.2.1** (`com.moodle.moodlemobile`). Other app versions need a compatible patch update.
+- Supports any Moodle site address when the site's browser SSO and app-token return flow are configured to work together.
+- The JYU workaround above was reported working. Sign-in and reconnect have not been independently verified on a range of Moodle sites. This patch cannot change Moodle server settings or guarantee every site's handoff.
 
-<!-- PATCHES_START EXPANDED -->
-<!-- PATCHES_END -->
+See [Moodle's SSO guidance](https://docs.moodle.org/502/en/Moodle_app_FAQ#SSO_is_not_working_with_my_custom_auth_plugin) for server-side requirements.
 
-## Build
+## Privacy and project status
 
-Use Java 21 and an Android SDK. CI builds pinned public sources for the Morphe plugin and patcher rather than relying on package-registry availability. For a local build, check out these dependencies alongside this repository:
+The patch adds a button that uses Moodle's existing browser SSO flow. It does not read your password, copy browser cookies, or change course content. Authentication remains subject to your Moodle site's configuration.
 
-| Dependency | Commit |
-| --- | --- |
-| [morphe-patches-gradle-plugin](https://github.com/MorpheApp/morphe-patches-gradle-plugin) | `0a2c1971e2913a6ea5e8fd192d359765169a6a06` |
-| [morphe-patcher](https://github.com/MorpheApp/morphe-patcher) | `812e96eaac173cd058ba49e242325371959befae` |
-
-Set `ORG_GRADLE_PROJECT_morphePluginSource` and `ORG_GRADLE_PROJECT_morphePatcherSource` to their absolute checkout paths, then run `./gradlew :patches:buildAndroid` (`gradlew.bat` on Windows). The upstream plugin also requires `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables. Keep credentials out of tracked files. Output: `patches/build/libs/patches-*.mpp`.
-
-Pushes to `dev` publish experimental releases. Stable releases require an explicit workflow run on `main`.
-
-## License
-
-Based on the Morphe patches template. GPL-3.0, with [LICENSE](LICENSE) and [NOTICE](NOTICE).
+This is an independent community patch and is not affiliated with or endorsed by Moodle, JYU, or Morphe. Licensed under GPL-3.0; see [LICENSE](LICENSE).
