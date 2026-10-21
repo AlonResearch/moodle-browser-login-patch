@@ -12,9 +12,9 @@ An experimental patch for use with Morphe. It adds **Log in through browser** to
 
 ### "Plugin not enabled or configured"
 
-Moodle can show this error when its mobile authentication mode is not set to browser SSO. In Moodle's launch script, the handoff cookie is set before that configuration check. On JYU, the user reported that **Continue -> website login** then worked. That sequence depends on the server and browser session and is not guaranteed elsewhere. It does not necessarily mean the mobile web service itself is disabled.
+If the browser shows this error, tap **Continue**, then choose **Login with JYU credentials** (or your institution's SSO option) on Moodle's login page and finish the sign-in. The browser may reuse an existing university SSO session, so you usually do not need to log out first. Wait for the browser to return to the Moodle app, then check that the app itself is signed in; seeing Moodle in the browser alone is not enough. This Continue → institution login sequence is what the JYU user reported working.
 
-If it appears, try **Continue**, choose your institution's login method, and complete authentication. Then check whether the Moodle app itself reconnects. If it does not, use the website directly or ask the site administrator to check mobile authentication mode, mobile web services, token permissions, and the SSO return redirect. This patch cannot change those server settings.
+Moodle's launch script sets a short-lived app-handoff cookie before checking whether browser login is enabled for the site. That can explain why the error appears while a later institution login still completes the handoff. It is an app-launch marker, not your browser's Moodle session cookie being copied into the app. The error does not necessarily mean mobile web services are disabled. This server-dependent workaround is not guaranteed on every Moodle site. If the app does not open or reconnect, use the website or ask the site administrator to check mobile authentication mode, mobile web services, token permissions, and the SSO return redirect. The patch cannot change those server settings.
 
 ### Reconnecting after logout
 
