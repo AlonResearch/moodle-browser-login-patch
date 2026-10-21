@@ -33,7 +33,13 @@ Android cannot update an app signed by a different key. Replacing a Play Store i
 
 Disable or remove the earlier JYU-only patch source before patching Moodle with this source. Use the original APK, not an already patched APK.
 
-Official downloads: [Moodle](https://download.moodle.org/mobile/). This patch requires 5.2.1 even if that page later offers a newer version. Original development APK SHA-256: `96fdab4bc72376f4a766a1fe47f70e2306391ce5246cda7eff5486f697f8e61d`. Releases contain patch bundles, not Moodle APKs or signing keys.
+## Direct install APK
+
+The experimental release also includes a pre-patched APK for Moodle Android **5.2.1**. It is signed with this project's release key so Android can install it directly. Android treats it as a different signer from the Play Store APK and from APKs signed by your Morphe installation. If Android refuses the install because of a signature conflict, sync offline work, uninstall the existing Moodle app, then install the release APK. Uninstalling clears local app data. This release key is used for future direct-install APK updates; do not expect an APK signed by another key to update this copy.
+
+The release APK and `.mpp` apply the same patch. The `.mpp` route lets Morphe sign the result with your own Morphe key; the direct APK route is simpler to install but requires the project release signature. Neither option guarantees that every Moodle server can complete its browser-to-app token handoff.
+
+Official downloads: [Moodle](https://download.moodle.org/mobile/). This patch requires 5.2.1 even if that page later offers a newer version. Original development APK SHA-256: `96fdab4bc72376f4a766a1fe47f70e2306391ce5246cda7eff5486f697f8e61d`. The release contains a patched APK and a patch bundle, but not the private signing key or credentials.
 
 ## How it works
 
